@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faturamento Anual</title>
+</head>
+<body>
+    <script>
+        // exemplos
+        const faturamentoDiario = [100, 200, 0, 300, 404, 0, 505, 604, 0, 700, 800, 0, 900, 1000, 0, 10, 55];
+
+        function calcularFaturamento(faturamento) {
+            let menor = Infinity;
+            let maior = -Infinity;
+            let soma = 0;
+            let diasComFaturamento = 0;
+            let diasAcimaMedia = 0;
+
+            for (let valor of faturamento) {
+                if (valor > 0) {
+                    if (valor < menor) menor = valor;
+                    if (valor > maior) maior = valor;
+                    soma += valor;
+                    diasComFaturamento++;
+                }
+            }
+
+            const media = soma / diasComFaturamento;
+
+            for (let valor of faturamento) {
+                if (valor > media) diasAcimaMedia++;
+            }
+
+            return { menor, maior, diasAcimaMedia };
+        }
+
+        const resultados = calcularFaturamento(faturamentoDiario);
+        document.body.innerHTML = `<ul>` +
+                                   `<li> Menor Faturamento: ${resultados.menor} </li>` +
+                                   `<li> Maior Faturamento: ${resultados.maior} </li>` +
+                                   `<li> Dias Acima da Média: ${resultados.diasAcimaMedia} </li>` +
+                                   `</ul>`;
+    </script>
+</body>
+</html>
